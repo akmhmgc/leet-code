@@ -8,19 +8,18 @@
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer[]}
+# O(n log(n))
+# sort the array (preserving original index), then two-pointer stategy
 def two_sum(nums, target)
-  sorted = nums.sort
-  len = sorted.length
+  map = {}
   i = 0
-  while i < len
-    val1 = sorted[i]
-    val2 = sorted[(i+1)..-1].bsearch { |x| x >= target - sorted[i] }
-    if val2 && val1 + val2 == target
-      vals = [val1, val2]
-      break
+  while i < nums.length
+    if map[target - nums[i]]
+      return [map[target - nums[i]], i]
+    else
+      map[nums[i]] = i
     end
     i += 1
   end
-  [nums.index(vals[0]), nums.rindex(vals[1])]
 end
 # @lc code=end
