@@ -7,16 +7,14 @@
 # @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        left = 0 #Buy
-        right = 1 #Sell
         max_profit = 0
-        while right < len(prices):
-            currentProfit = prices[right] - prices[left] #our current Profit
-            if prices[left] < prices[right]:
-                max_profit =max(currentProfit,max_profit)
-            else:
-                left = right
-            right += 1
+        min_value = prices[0]
+        i = 0
+        while i < len(prices):
+            current_value = prices[i]
+            min_value = min(min_value, current_value)
+            max_profit = max(max_profit, current_value - min_value)
+            i += 1
         return max_profit
 
 # @lc code=end
