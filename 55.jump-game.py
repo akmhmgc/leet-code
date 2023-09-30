@@ -7,19 +7,11 @@
 # @lc code=start
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        if len(nums) == 1: return True
-
-        i = len(nums) - 2
-        min_step = 1
-        flag = True
-        while i >= 0:
-            if nums[i] < min_step:
-                min_step += 1
-                flag = False
-            else:
-                min_step = 1
-                flag = True
-            i -= 1
-        return flag
+        # 最大で到達できる場所を更新していく
+        reachable = 0
+        for i in range(len(nums)):
+            if reachable < i: return False
+            reachable = max(reachable, i + nums[i])
+        return True
 # @lc code=end
 
