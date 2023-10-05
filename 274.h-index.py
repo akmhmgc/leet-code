@@ -6,7 +6,7 @@
 
 # @lc code=start
 class Solution:
-    def hIndex(self, citations: List[int]) -> int:
+    def hIndex(self, citations: List[int])ww -> int:
         sorted_citatios = sorted(citations)
         n = len(citations)
         for i in range(n):
