@@ -6,20 +6,16 @@
 
 # @lc code=start
 class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -> str:
-        ans = ""
-        min_word_length = 1000
-        for word in strs:
-            min_word_length = min(min_word_length, len(word))
-        
-        for i in range(min_word_length):
-            s = set()
-            for str in strs:
-                s.add(str[i])
-            if len(s) == 1:
-                ans+= str[i]
-            else:
-                break
-        return ans
+    def longestCommonPrefix(self, v: List[str]) -> str:
+        ans=""
+        v=sorted(v)
+        first=v[0]
+        last=v[-1]
+        # ソートしたやつの一番最初と最後の共通要素が答えになるはず
+        for i in range(min(len(first),len(last))):
+            if(first[i]!=last[i]):
+                return ans
+            ans+=first[i]
+        return ans 
                 
 
