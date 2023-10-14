@@ -5,21 +5,24 @@
 --
 -- @lc code=start
 # Write your MySQL query statement below
-select
-  machine_id,
-  round(avg(diff),3) processing_time
-from
-  (
-    select
-      machine_id,
-      process_id,
-      max(timestamp) - min(timestamp) as diff
-    from
-      Activity
-    group by
-      machine_id,
-      process_id
-  ) tmp
-  group by tmp.machine_id
-  
+select 
+a.machine_id,
+round(
+      (
+        select
+          avg(a1.timestamp)
+          from Activity a1
+          where a1.activity_type = 'end'
+          and a1.machine_id = a.machine_id
+      ) - 
+      (
+        select
+          avg(a1.timestamp)
+          from Activity a1
+          where a1.activity_type = 'start'
+          and a1.machine_id = a.machine_id
+      )
+,3) as processing_time
+from Activity a
+group by a.machine_id
 -- @lc code=end
