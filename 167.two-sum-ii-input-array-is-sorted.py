@@ -8,8 +8,7 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         remains = {}
-        for i, num in enumerate(numbers):
-            i += 1
+        for i, num in enumerate(numbers, 1):
             remain = target - num
             if num in remains:
                 return [remains[num], i]
