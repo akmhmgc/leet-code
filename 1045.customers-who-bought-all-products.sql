@@ -7,12 +7,10 @@
 -- @lc code=start
 # Write your MySQL query statement below
 SELECT
-  C.customer_id
-  from Customer C
-  inner join Product P
-  on C.product_key = P.product_key
-  group by C.customer_id
-  having count(distinct(C.product_key)) = (
+  customer_id
+  from Customer
+  group by customer_id
+  having count(distinct(product_key)) = (
     select count(*)
       from Product
   )
