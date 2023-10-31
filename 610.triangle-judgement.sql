@@ -23,7 +23,7 @@ select
         else 'No'
       end
     )
-    when z >= x and z >= y then (
+    else (
       case
         when  z < x + y then 'Yes'
         else 'No'
