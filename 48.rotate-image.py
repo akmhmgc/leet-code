@@ -10,28 +10,20 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        if len(matrix) == 1: return matrix
-
         n = len(matrix)
-        left,right = 0, n - 1
-        for i in range(math.floor(n / 2)):
-            for j in range(left, right):
+        for i in range(math.ceil(n / 2)):
+            for j in range(math.ceil(n / 2)):
                 points = [
                     [i,j],
                     [j, n - 1 - i],
                     [n - 1 - i, n - j - 1],
                     [n - j - 1, i]   
                 ]
-                val = []
-                for k in range(-1,3):
-                    x, y = points[k]
-                    val.append(matrix[x][y])
+                val = [matrix[x][y] for x,y in points]
                 print(val)
                 for k in range(4):
                     x, y = points[k]
-                    matrix[x][y] = val[k]
-            left += 1
-            right -= 1
+                    matrix[x][y] = val[k - 1]
         return matrix
 # @lc code=end
 
