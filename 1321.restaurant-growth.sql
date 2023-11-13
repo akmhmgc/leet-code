@@ -6,44 +6,23 @@
 -- @lc code=start
 # Write your MySQL query statement below
 select
-  tmp2.visited_on,
-  tmp2.amount,
-  tmp2.average_amount
+  visited_on,
+  sum(amount) over (
+    order by
+      visited_on asc range between interval '6' day preceding
+      and current row
+  ) amount,
+  round(
+    avg(amount) over (
+      order by
+        visited_on asc range between interval '6' day preceding
+        and current row
+    ),
+    2
+  ) average_amount,
+  min(visited_on) over (
+  ) min_visited_on
 from
-  (
-    select
-      visited_on,
-      sum(amount) over (
-        order by
-          visited_on asc range between interval '6' day preceding
-          and current row
-      ) amount,
-      round(
-        avg(amount) over (
-          order by
-            visited_on asc range between interval '6' day preceding
-            and current row
-        ),
-        2
-      ) average_amount,
-      count(amount) over (
-        order by
-          visited_on asc range between interval '6' day preceding
-          and current row
-      ) cnt
-    from
-      (
-        select
-          visited_on,
-          sum(amount) amount
-        from
-          Customer
-        group by
-          visited_on
-        order by
-          visited_on
-      ) tmp
-  ) tmp2
-  where tmp2.cnt = 7
+  Customer
 
 -- @lc code=end
