@@ -7,11 +7,7 @@
 # @lc code=start
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        ransom_counter = Counter(ransomNote)
-        magazine_counter = Counter(magazine)
-        flag = True
-        for k in ransom_counter:
-            if ransom_counter[k] > magazine_counter[k]: flag = False
-        return flag
+        ransom_counter, magazine_counter = Counter(ransomNote), Counter(magazine)
+        return ransom_counter & magazine_counter == ransom_counter
 # @lc code=end
 
