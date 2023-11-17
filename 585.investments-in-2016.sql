@@ -18,8 +18,7 @@ SELECT
     SELECT *
       from Insurance I3
       where I3.pid != I1.pid
-      and I3.lat = I1.lat
-      and I3.lon = I1.lon
+      and (I3.lat, I3.lon) in (I1.lat, I1.lon)
   )
 -- @lc code=end
 
