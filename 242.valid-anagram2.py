@@ -7,24 +7,14 @@
 # @lc code=start
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        hash_s = {}
-        hash_t = {}
-        distinct_words = set()
-        for i in s:
-            distinct_words.add(i)
-            if i in hash_s:
-                hash_s[i] += 1
-            else:
-                hash_s[i] = 1
-        for i in t:
-            distinct_words.add(i)
-            if i in hash_t:
-                hash_t[i] += 1
-            else:
-                hash_t[i] = 1
-        for i in distinct_words:
-            if i not in hash_s or i not in hash_t or hash_s[i] != hash_t[i]: return False
+        if len(s) != len(t): return False
+
+        countS, countT = {}, {}
+        for i in range(len(s)):
+            countS[s[i]] = countS.get(s[i], 0) + 1
+            countT[t[i]] = countT.get(t[i], 0) + 1
+        for c in countS:
+            if countS[c] != countT.get(c, 0): return False
         return True
-    
 # @lc code=end
 
