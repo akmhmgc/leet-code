@@ -20,9 +20,9 @@ class Solution:
         
         root.left = right
         root.right = left
-        
-        if left: self.invertTree(left)
-        if right: self.invertTree(right)
+
+        self.invertTree(left)
+        self.invertTree(right)
 
         return root
 # @lc code=end
