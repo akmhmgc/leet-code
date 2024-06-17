@@ -16,8 +16,7 @@ class Solution:
         if not subRoot: return True
         if not root: return False
 
-        if self.isSameTree(root, subRoot): return True
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        return self.isSameTree(root, subRoot) or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         if not p and not q: return True
         if not p or not q or p.val != q.val: return False
