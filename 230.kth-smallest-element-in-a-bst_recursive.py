@@ -18,6 +18,7 @@ class Solution:
         def doInOrderDFS(node):
             if not node:
                 return
+            print(node.val)
             
             doInOrderDFS(node.left)
             inOrder.append(node.val)
